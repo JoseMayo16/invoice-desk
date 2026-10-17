@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --color-brand-50: #ecf7f3;
+  --color-brand-100: #d2ede3;
+  --color-brand-500: #13805f;
+  --color-brand-600: #0f6b50;
+  --color-brand-700: #0c5541;
+  --color-ink: #16181d;
+}
+
+@layer base {
+  body {
+    @apply bg-zinc-50 text-ink antialiased;
+  }
+  h1, h2, h3 {
+    @apply tracking-tight;
+  }
+}
+
+/* Utilities rather than components so they can be combined and @applied (Tailwind 4). */
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-semibold whitespace-nowrap transition disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn bg-brand-600 text-white shadow-sm hover:bg-brand-700;
+}
+@utility btn-secondary {
+  @apply btn border border-zinc-300 bg-white text-zinc-800 hover:bg-zinc-50;
+}
+@utility btn-danger {
+  @apply btn border border-red-200 bg-white text-red-700 hover:bg-red-50;
+}
+@utility btn-ghost {
+  @apply btn text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900;
+}
+@utility input {
+  @apply block w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm shadow-xs outline-none placeholder:text-zinc-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 aria-invalid:border-red-400;
+}
+@utility label {
+  @apply mb-1 block text-sm font-medium text-zinc-700;
+}
+@utility field-error {
+  @apply mt-1 text-xs text-red-600;
+}
+@utility card {
+  @apply rounded-xl border border-zinc-200 bg-white shadow-xs;
+}
+@utility num {
+  @apply font-mono tabular-nums;
+}
