@@ -10,8 +10,8 @@
 <title>Invoice {{ $invoice->number }}</title>
 <style>
     @page { margin: 36px 42px; }
-    body { font-family: DejaVu Sans, sans-serif; font-size: 10.5px; color: #1d1f24; }
-    h1 { font-size: 22px; margin: 0; letter-spacing: 1px; color: #0f5d4a; }
+    body { font-family: DejaVu Sans, sans-serif; font-size: 10.5px; color: #111214; }
+    h1 { font-size: 22px; margin: 0; letter-spacing: 1px; color: #111214; }
     .muted { color: #6b6f78; }
     table { width: 100%; border-collapse: collapse; }
     .head td { vertical-align: top; }
@@ -26,7 +26,7 @@
     .totals td { padding: 4px; }
     .totals .grand td { border-top: 1.5px solid #1d1f24; font-size: 13px; font-weight: bold; padding-top: 8px; }
     .status { display: inline-block; padding: 3px 10px; border-radius: 10px; font-size: 9.5px;
-              background: #e7f4ef; color: #0f5d4a; text-transform: uppercase; letter-spacing: .5px; }
+              background: #eef5f1; color: #1d6b47; text-transform: uppercase; letter-spacing: .5px; }
     .notes { margin-top: 28px; padding-top: 10px; border-top: 1px solid #e3e4e8; white-space: pre-line; }
 </style>
 </head>

@@ -1,19 +1,21 @@
 @import "tailwindcss";
 
+/* Look: an accounting tool, not a template. Neutral surfaces, hairlines, ink for actions,
+   one deep green reserved for money that came in. Same type and green as the author's portfolio. */
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --color-brand-50: #ecf7f3;
-  --color-brand-100: #d2ede3;
-  --color-brand-500: #13805f;
-  --color-brand-600: #0f6b50;
-  --color-brand-700: #0c5541;
-  --color-ink: #16181d;
+  --color-brand-50: #eef5f1;
+  --color-brand-100: #d7e9df;
+  --color-brand-500: #2a7a55;
+  --color-brand-600: #1d6b47;
+  --color-brand-700: #17583a;
+  --color-ink: #111214;
 }
 
 @layer base {
   body {
-    @apply bg-zinc-50 text-ink antialiased;
+    @apply bg-white text-ink antialiased;
   }
   h1, h2, h3 {
     @apply tracking-tight;
@@ -22,32 +24,35 @@
 
 /* Utilities rather than components so they can be combined and @applied (Tailwind 4). */
 @utility btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-semibold whitespace-nowrap transition disabled:cursor-not-allowed disabled:opacity-50;
+  @apply inline-flex h-8 items-center justify-center gap-2 rounded-md px-3 text-sm font-medium whitespace-nowrap transition-colors disabled:cursor-not-allowed disabled:opacity-50;
 }
 @utility btn-primary {
-  @apply btn bg-brand-600 text-white shadow-sm hover:bg-brand-700;
+  @apply btn bg-ink text-white hover:bg-zinc-700;
 }
 @utility btn-secondary {
   @apply btn border border-zinc-300 bg-white text-zinc-800 hover:bg-zinc-50;
 }
 @utility btn-danger {
-  @apply btn border border-red-200 bg-white text-red-700 hover:bg-red-50;
+  @apply btn border border-zinc-300 bg-white text-red-700 hover:border-red-300 hover:bg-red-50;
 }
 @utility btn-ghost {
   @apply btn text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900;
 }
 @utility input {
-  @apply block w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm shadow-xs outline-none placeholder:text-zinc-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 aria-invalid:border-red-400;
+  @apply block h-8 w-full rounded-md border border-zinc-300 bg-white px-2.5 text-sm outline-none placeholder:text-zinc-400 focus:border-ink focus:ring-1 focus:ring-ink aria-invalid:border-red-500;
 }
 @utility label {
-  @apply mb-1 block text-sm font-medium text-zinc-700;
+  @apply mb-1 block text-xs font-medium text-zinc-600;
 }
 @utility field-error {
-  @apply mt-1 text-xs text-red-600;
+  @apply mt-1 text-xs text-red-700;
 }
 @utility card {
-  @apply rounded-xl border border-zinc-200 bg-white shadow-xs;
+  @apply rounded-md border border-zinc-200 bg-white;
 }
 @utility num {
-  @apply font-mono tabular-nums;
+  @apply font-mono text-[0.92em] tabular-nums;
+}
+@utility page-title {
+  @apply text-xl font-semibold;
 }

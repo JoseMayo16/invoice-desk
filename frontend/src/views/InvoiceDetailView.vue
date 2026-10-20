@@ -93,6 +93,11 @@ async function recordPayment() {
   }
 }
 
+const more = ref<HTMLDetailsElement>()
+function closeMore() {
+  if (more.value) more.value.open = false
+}
+
 async function copyLink() {
   await navigator.clipboard.writeText(invoice.value!.public_url!)
   notice.value = 'Payment link copied.'
@@ -102,11 +107,11 @@ async function copyLink() {
 <template>
   <p v-if="failure" class="field-error">{{ failure }}</p>
   <template v-if="invoice">
-    <RouterLink to="/invoices" class="text-sm text-zinc-500 hover:text-zinc-800">← Invoices</RouterLink>
+    <RouterLink to="/invoices" class="text-xs text-zinc-500 hover:text-zinc-800">Invoices /</RouterLink>
     <div class="mt-1 flex flex-wrap items-start justify-between gap-4">
       <div>
         <div class="flex items-center gap-3">
-          <h1 class="num text-2xl font-bold">{{ invoice.number }}</h1>
+          <h1 class="num text-xl font-medium">{{ invoice.number }}</h1>
           <StatusBadge :status="invoice.status" />
         </div>
         <p class="mt-1 text-sm text-zinc-500">
@@ -119,15 +124,23 @@ async function copyLink() {
         <button v-if="invoice.can?.record_payment" class="btn-primary" :disabled="!!busy" @click="openPayment">Record payment</button>
         <RouterLink v-if="invoice.can?.update" :to="`/invoices/${invoice.id}/edit`" class="btn-secondary">Edit</RouterLink>
         <a :href="`/api/invoices/${invoice.id}/pdf`" target="_blank" rel="noopener" class="btn-secondary">PDF</a>
-        <button v-if="invoice.public_url" class="btn-secondary" @click="copyLink">Copy pay link</button>
-        <button class="btn-secondary" :disabled="!!busy" @click="duplicate">Duplicate</button>
-        <button v-if="invoice.status === 'sent' || invoice.status === 'overdue' || invoice.status === 'draft'" class="btn-ghost" :disabled="!!busy" @click="voidIt">Void</button>
-        <button v-if="invoice.can?.delete" class="btn-danger" @click="remove">Delete</button>
+        <details ref="more" class="relative">
+          <summary class="btn-secondary list-none [&::-webkit-details-marker]:hidden" aria-label="More actions">
+            More
+            <svg class="size-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+          </summary>
+          <div class="absolute right-0 z-10 mt-1 w-44 rounded-md border border-zinc-200 bg-white py-1 text-sm shadow-lg" @click="closeMore">
+            <button v-if="invoice.public_url" class="block w-full px-3 py-1.5 text-left hover:bg-zinc-50" @click="copyLink">Copy pay link</button>
+            <button class="block w-full px-3 py-1.5 text-left hover:bg-zinc-50 disabled:opacity-50" :disabled="!!busy" @click="duplicate">Duplicate</button>
+            <button v-if="invoice.status === 'sent' || invoice.status === 'overdue' || invoice.status === 'draft'" class="block w-full px-3 py-1.5 text-left hover:bg-zinc-50 disabled:opacity-50" :disabled="!!busy" @click="voidIt">Void</button>
+            <button v-if="invoice.can?.delete" class="block w-full border-t border-zinc-100 px-3 py-1.5 text-left text-red-700 hover:bg-red-50" @click="remove">Delete</button>
+          </div>
+        </details>
       </div>
     </div>
-    <p v-if="notice" class="mt-4 rounded-lg bg-brand-50 px-4 py-2.5 text-sm text-brand-700" role="status">{{ notice }}</p>
+    <p v-if="notice" class="mt-4 rounded-md border border-brand-100 bg-brand-50 px-3 py-2 text-sm text-brand-700" role="status">{{ notice }}</p>
 
-    <div class="mt-6 grid gap-6 xl:grid-cols-[1fr_18rem]">
+    <div class="mt-6 grid gap-8 xl:grid-cols-[1fr_16rem]">
       <InvoicePaper
         :number="invoice.number"
         :from="company"
@@ -144,8 +157,8 @@ async function copyLink() {
         :notes="invoice.notes"
       />
       <aside class="space-y-4">
-        <section class="card p-4 text-sm">
-          <h2 class="font-semibold">Payments</h2>
+        <section class="text-sm">
+          <h2 class="border-b border-zinc-200 pb-2 text-xs font-semibold text-zinc-500">Payments</h2>
           <p v-if="!invoice.payments?.length" class="mt-2 text-zinc-500">No payments yet.</p>
           <ul class="mt-2 divide-y divide-zinc-100">
             <li v-for="p in invoice.payments" :key="p.id" class="py-2">
@@ -154,8 +167,8 @@ async function copyLink() {
             </li>
           </ul>
         </section>
-        <section class="card p-4 text-sm">
-          <h2 class="font-semibold">Activity</h2>
+        <section class="text-sm">
+          <h2 class="border-b border-zinc-200 pb-2 text-xs font-semibold text-zinc-500">Activity</h2>
           <ul class="mt-2 space-y-1 text-zinc-600">
             <li>Issued {{ formatDate(invoice.issue_date) }}</li>
             <li v-if="invoice.sent_at">Sent {{ formatDate(invoice.sent_at) }}</li>

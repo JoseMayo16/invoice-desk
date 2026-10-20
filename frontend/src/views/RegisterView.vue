@@ -32,10 +32,10 @@ async function submit() {
 <template>
   <div class="flex min-h-screen items-center justify-center px-4 py-12">
     <div class="w-full max-w-md">
-      <div class="mb-8 flex items-center gap-2 text-lg font-bold">
+      <div class="mb-8 flex items-center gap-2 text-lg font-semibold">
         <LogoMark class="size-8" /> InvoiceDesk
       </div>
-      <h1 class="text-2xl font-bold">Create your account</h1>
+      <h1 class="page-title">Create your account</h1>
       <p class="mt-1 text-sm text-zinc-500">You will be the owner of your company's workspace.</p>
 
       <form class="mt-6 grid gap-4 sm:grid-cols-2" novalidate @submit.prevent="submit">

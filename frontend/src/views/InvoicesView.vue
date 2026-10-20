@@ -49,38 +49,38 @@ watch(() => route.query, load, { immediate: true })
 </script>
 
 <template>
-  <div class="flex flex-wrap items-center justify-between gap-3">
-    <h1 class="text-2xl font-bold">Invoices</h1>
+  <div class="flex flex-wrap items-end justify-between gap-3">
+    <h1 class="page-title">Invoices</h1>
     <RouterLink to="/invoices/new" class="btn-primary">New invoice</RouterLink>
   </div>
 
-  <div class="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-    <nav class="flex gap-1 overflow-x-auto" aria-label="Filter by status">
+  <div class="mt-4 flex flex-col gap-3 border-b border-zinc-200 sm:flex-row sm:items-end sm:justify-between">
+    <nav class="-mb-px flex gap-5 overflow-x-auto" aria-label="Filter by status">
       <button
         v-for="tab in tabs"
         :key="tab.value"
-        class="rounded-lg px-3 py-1.5 text-sm font-medium whitespace-nowrap"
-        :class="(route.query.status ?? '') === tab.value ? 'bg-zinc-900 text-white' : 'text-zinc-600 hover:bg-zinc-100'"
+        class="border-b-2 pb-2.5 text-sm whitespace-nowrap"
+        :class="(route.query.status ?? '') === tab.value ? 'border-ink font-medium text-ink' : 'border-transparent text-zinc-500 hover:text-zinc-900'"
         :aria-pressed="(route.query.status ?? '') === tab.value"
         @click="setQuery({ status: tab.value || undefined, page: undefined })"
       >{{ tab.label }}</button>
     </nav>
-    <input v-model="search" type="search" class="input sm:max-w-64" placeholder="Search number or client" aria-label="Search invoices" />
+    <input v-model="search" type="search" class="input mb-2 sm:max-w-64" placeholder="Search number or client" aria-label="Search invoices" />
   </div>
 
   <p v-if="failure" class="field-error mt-4">{{ failure }}</p>
 
-  <div class="card mt-4 overflow-x-auto" :class="{ 'opacity-60': loading }">
+  <div class="mt-2 overflow-x-auto" :class="{ 'opacity-60': loading }">
     <table class="w-full min-w-[44rem] text-sm">
       <thead class="border-b border-zinc-200 text-left text-xs text-zinc-500">
         <tr>
-          <th class="px-4 py-3 font-medium">Number</th>
-          <th class="px-4 py-3 font-medium">Client</th>
-          <th class="px-4 py-3 font-medium">Issued</th>
-          <th class="px-4 py-3 font-medium">Due</th>
-          <th class="px-4 py-3 text-right font-medium">Total</th>
-          <th class="px-4 py-3 text-right font-medium">Balance</th>
-          <th class="px-4 py-3 font-medium">Status</th>
+          <th class="px-3 py-2 font-normal">Number</th>
+          <th class="px-3 py-2 font-normal">Client</th>
+          <th class="px-3 py-2 font-normal">Issued</th>
+          <th class="px-3 py-2 font-normal">Due</th>
+          <th class="px-3 py-2 text-right font-normal">Total</th>
+          <th class="px-3 py-2 text-right font-normal">Balance</th>
+          <th class="px-3 py-2 font-normal">Status</th>
         </tr>
       </thead>
       <tbody>
@@ -90,13 +90,13 @@ watch(() => route.query, load, { immediate: true })
           class="cursor-pointer border-b border-zinc-100 whitespace-nowrap last:border-0 hover:bg-zinc-50"
           @click="router.push(`/invoices/${inv.id}`)"
         >
-          <td class="px-4 py-3"><RouterLink :to="`/invoices/${inv.id}`" class="num font-medium hover:underline" @click.stop>{{ inv.number }}</RouterLink></td>
-          <td class="max-w-56 truncate px-4 py-3 whitespace-normal">{{ inv.client?.name }}</td>
-          <td class="px-4 py-3 text-zinc-600">{{ formatDate(inv.issue_date) }}</td>
-          <td class="px-4 py-3 text-zinc-600">{{ formatDate(inv.due_date) }}</td>
-          <td class="num px-4 py-3 text-right">{{ formatMoney(inv.total, inv.currency) }}</td>
-          <td class="num px-4 py-3 text-right" :class="inv.balance ? 'font-medium' : 'text-zinc-400'">{{ formatMoney(inv.balance, inv.currency) }}</td>
-          <td class="px-4 py-3"><StatusBadge :status="inv.status" /></td>
+          <td class="px-3 py-2.5"><RouterLink :to="`/invoices/${inv.id}`" class="num hover:underline" @click.stop>{{ inv.number }}</RouterLink></td>
+          <td class="max-w-56 truncate px-3 py-2.5 whitespace-normal">{{ inv.client?.name }}</td>
+          <td class="px-3 py-2.5 text-zinc-600">{{ formatDate(inv.issue_date) }}</td>
+          <td class="px-3 py-2.5 text-zinc-600">{{ formatDate(inv.due_date) }}</td>
+          <td class="num px-3 py-2.5 text-right">{{ formatMoney(inv.total, inv.currency) }}</td>
+          <td class="num px-3 py-2.5 text-right" :class="inv.balance ? 'font-medium' : 'text-zinc-400'">{{ formatMoney(inv.balance, inv.currency) }}</td>
+          <td class="px-3 py-2.5"><StatusBadge :status="inv.status" /></td>
         </tr>
       </tbody>
     </table>

@@ -66,4 +66,9 @@ class AuthTest extends TestCase
         $this->getJson('/api/me')->assertUnauthorized();
         $this->getJson('/api/invoices')->assertUnauthorized();
     }
+
+    public function test_api_answers_401_to_a_plain_browser_request(): void
+    {
+        $this->get('/api/me')->assertUnauthorized()->assertJson(['message' => 'Unauthenticated.']);
+    }
 }

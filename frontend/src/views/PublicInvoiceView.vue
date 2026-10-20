@@ -47,7 +47,7 @@ async function pay() {
 </script>
 
 <template>
-  <div class="min-h-screen px-4 py-8 sm:py-12">
+  <div class="min-h-screen bg-zinc-50 px-4 py-8 sm:py-12">
     <div class="mx-auto max-w-3xl">
       <p v-if="failure" class="card p-8 text-center text-zinc-600">This invoice link is not valid or has been withdrawn.</p>
       <template v-if="invoice">
@@ -63,10 +63,10 @@ async function pay() {
             </button>
           </div>
         </div>
-        <p v-if="returnedFromCheckout && invoice.status !== 'paid'" class="mb-4 rounded-lg bg-sky-50 px-4 py-3 text-sm text-sky-800" role="status">
+        <p v-if="returnedFromCheckout && invoice.status !== 'paid'" class="mb-4 rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm text-zinc-700" role="status">
           Thanks! We are confirming your payment with the bank. This page updates on its own.
         </p>
-        <p v-if="invoice.status === 'paid'" class="mb-4 rounded-lg bg-emerald-50 px-4 py-3 text-sm text-emerald-800" role="status">
+        <p v-if="invoice.status === 'paid'" class="mb-4 rounded-md border border-brand-100 bg-brand-50 px-3 py-2 text-sm text-brand-700" role="status">
           This invoice is paid. Thank you!
         </p>
         <InvoicePaper

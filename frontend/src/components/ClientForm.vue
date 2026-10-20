@@ -58,11 +58,11 @@ async function save() {
     </div>
     <div class="sm:col-span-2">
       <label class="label" for="c-address">Billing address</label>
-      <textarea id="c-address" v-model="form.address" rows="2" class="input" />
+      <textarea id="c-address" v-model="form.address" rows="2" class="input h-auto py-1.5" />
     </div>
     <div class="sm:col-span-2">
       <label class="label" for="c-notes">Notes</label>
-      <textarea id="c-notes" v-model="form.notes" rows="2" class="input" placeholder="Only visible to your team" />
+      <textarea id="c-notes" v-model="form.notes" rows="2" class="input h-auto py-1.5" placeholder="Only visible to your team" />
     </div>
     <p v-if="failure" class="field-error sm:col-span-2">{{ failure }}</p>
     <div class="flex justify-end gap-2 sm:col-span-2">

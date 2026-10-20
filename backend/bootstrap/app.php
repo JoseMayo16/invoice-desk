@@ -15,6 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         // Cookie-based Sanctum auth for requests coming from the Vue app.
         $middleware->statefulApi();
+        // The SPA owns /login; without this, a guest hitting /api/* from a plain browser tab
+        // made the auth middleware look up a missing "login" route and answer 500 instead of 401.
+        $middleware->redirectGuestsTo('/login');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

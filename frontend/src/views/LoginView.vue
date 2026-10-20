@@ -38,10 +38,10 @@ function useDemo(email: string) {
 <template>
   <div class="flex min-h-screen items-center justify-center px-4 py-12">
     <div class="w-full max-w-sm">
-      <div class="mb-8 flex items-center gap-2 text-lg font-bold">
+      <div class="mb-8 flex items-center gap-2 text-lg font-semibold">
         <LogoMark class="size-8" /> InvoiceDesk
       </div>
-      <h1 class="text-2xl font-bold">Sign in</h1>
+      <h1 class="page-title">Sign in</h1>
       <p class="mt-1 text-sm text-zinc-500">Invoices, clients and online payments in one place.</p>
 
       <form class="mt-6 space-y-4" novalidate @submit.prevent="submit">

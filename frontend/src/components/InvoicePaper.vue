@@ -20,18 +20,17 @@ defineProps<{
 </script>
 
 <template>
-  <article class="card overflow-hidden">
-    <div class="h-1.5 bg-brand-600" />
+  <article class="rounded-md border border-zinc-200 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
     <div class="p-6 sm:p-10">
       <header class="flex flex-col gap-6 sm:flex-row sm:justify-between">
         <div class="text-sm">
-          <p class="text-base font-semibold">{{ from.name }}</p>
+          <p class="font-semibold">{{ from.name }}</p>
           <p v-if="from.address" class="whitespace-pre-line text-zinc-500">{{ from.address }}</p>
           <p v-if="from.email" class="text-zinc-500">{{ from.email }}</p>
           <p v-if="from.tax_id" class="text-zinc-500">Tax ID {{ from.tax_id }}</p>
         </div>
         <div class="sm:text-right">
-          <p class="text-2xl font-bold tracking-wide text-brand-700">INVOICE</p>
+          <p class="text-2xl font-semibold">Invoice</p>
           <dl class="mt-2 grid grid-cols-[auto_auto] gap-x-4 gap-y-0.5 text-sm whitespace-nowrap sm:justify-end">
             <dt class="text-zinc-500">Number</dt><dd class="num">{{ number }}</dd>
             <dt class="text-zinc-500">Issued</dt><dd>{{ formatDate(issueDate) }}</dd>
@@ -40,9 +39,9 @@ defineProps<{
         </div>
       </header>
 
-      <section class="mt-8 text-sm">
-        <p class="text-xs font-semibold tracking-wider text-zinc-500 uppercase">Bill to</p>
-        <p class="font-semibold">{{ to.name }}</p>
+      <section class="mt-10 text-sm">
+        <p class="text-xs text-zinc-500">Bill to</p>
+        <p class="mt-0.5 font-semibold">{{ to.name }}</p>
         <p v-if="to.address" class="whitespace-pre-line text-zinc-500">{{ to.address }}</p>
         <p v-if="to.tax_id" class="text-zinc-500">Tax ID {{ to.tax_id }}</p>
       </section>
@@ -50,12 +49,12 @@ defineProps<{
       <div class="mt-8 overflow-x-auto">
         <table class="w-full min-w-[32rem] text-sm">
           <thead>
-            <tr class="border-b-2 border-ink text-left text-xs tracking-wider text-zinc-500 uppercase">
-              <th class="py-2 pr-3 font-semibold">Description</th>
-              <th class="py-2 pr-3 text-right font-semibold">Qty</th>
-              <th class="py-2 pr-3 text-right font-semibold">Unit price</th>
-              <th class="py-2 pr-3 text-right font-semibold">Tax</th>
-              <th class="py-2 text-right font-semibold">Amount</th>
+            <tr class="border-b border-ink text-left text-xs text-zinc-500">
+              <th class="py-2 pr-3 font-normal">Description</th>
+              <th class="py-2 pr-3 text-right font-normal">Qty</th>
+              <th class="py-2 pr-3 text-right font-normal">Unit price</th>
+              <th class="py-2 pr-3 text-right font-normal">Tax</th>
+              <th class="py-2 text-right font-normal">Amount</th>
             </tr>
           </thead>
           <tbody>
@@ -76,12 +75,12 @@ defineProps<{
         <dt class="border-t border-ink pt-2 font-semibold">Total</dt>
         <dd class="num border-t border-ink pt-2 text-right font-semibold">{{ formatMoney(total, currency) }} {{ currency }}</dd>
         <template v-if="amountPaid > 0">
-          <dt class="text-zinc-500">Paid</dt><dd class="num text-right text-zinc-500">−{{ formatMoney(amountPaid, currency) }}</dd>
+          <dt class="text-zinc-500">Paid</dt><dd class="num text-right text-brand-700">−{{ formatMoney(amountPaid, currency) }}</dd>
           <dt class="font-semibold">Balance due</dt><dd class="num text-right font-semibold">{{ formatMoney(balance, currency) }}</dd>
         </template>
       </dl>
 
-      <p v-if="notes" class="mt-8 border-t border-zinc-200 pt-4 text-sm whitespace-pre-line text-zinc-600">{{ notes }}</p>
+      <p v-if="notes" class="mt-10 border-t border-zinc-200 pt-4 text-sm whitespace-pre-line text-zinc-600">{{ notes }}</p>
     </div>
   </article>
 </template>

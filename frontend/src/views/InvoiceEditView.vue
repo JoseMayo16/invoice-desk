@@ -96,7 +96,7 @@ async function save() {
   <div class="flex flex-wrap items-center justify-between gap-3">
     <div>
       <RouterLink :to="id ? `/invoices/${id}` : '/invoices'" class="text-sm text-zinc-500 hover:text-zinc-800">← Back</RouterLink>
-      <h1 class="text-2xl font-bold">{{ id ? `Edit ${number}` : 'New invoice' }}</h1>
+      <h1 class="page-title">{{ id ? `Edit ${number}` : 'New invoice' }}</h1>
     </div>
   </div>
 
@@ -125,7 +125,7 @@ async function save() {
       </div>
       <div>
         <span class="label">Currency</span>
-        <p class="input bg-zinc-50 text-zinc-600">{{ currency }}</p>
+        <p class="input flex items-center bg-zinc-50 text-zinc-600">{{ currency }}</p>
       </div>
     </section>
 
@@ -169,7 +169,7 @@ async function save() {
 
     <section class="card p-5">
       <label class="label" for="notes">Notes for the client</label>
-      <textarea id="notes" v-model="form.notes" rows="3" class="input" placeholder="Payment instructions, thanks, terms…" />
+      <textarea id="notes" v-model="form.notes" rows="3" class="input h-auto py-1.5" placeholder="Payment instructions, thanks, terms…" />
     </section>
 
     <div class="flex items-center justify-end gap-3">
